@@ -1,260 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mohamed Salih — Data Analyst portfolio featuring Python, SQL, Power BI, machine learning and data visualization projects.">
-  <title>Mohamed Salih | Data Analyst Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <style>
-    :root{
-      --bg:#07111f; --surface:#0d1a2b; --surface2:#102238; --text:#edf5ff;
-      --muted:#9fb0c5; --line:rgba(255,255,255,.09); --accent:#38bdf8;
-      --accent2:#6366f1; --white:#fff; --shadow:0 22px 60px rgba(0,0,0,.25);
-      --radius:22px; --max:1180px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:Inter,sans-serif;background:radial-gradient(circle at 85% 8%,rgba(56,189,248,.12),transparent 28%),var(--bg);color:var(--text);line-height:1.7}
-    a{color:inherit;text-decoration:none}
-    .container{width:min(var(--max),92%);margin:auto}
-    .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(7,17,31,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}
-    .logo{font-family:"Space Grotesk";font-weight:700;font-size:1.2rem;letter-spacing:-.03em}
-    .logo span{color:var(--accent)}
-    .links{display:flex;gap:28px;color:#c7d4e5;font-size:.92rem}
-    .links a:hover{color:var(--accent)}
-    .nav-btn{display:none;background:none;border:0;color:var(--white);font-size:1.4rem}
-    .hero{min-height:100vh;display:grid;place-items:center;padding:130px 0 80px;position:relative;overflow:hidden}
-    .hero:before{content:"";position:absolute;width:480px;height:480px;border-radius:50%;background:rgba(99,102,241,.14);filter:blur(70px);right:-150px;top:80px}
-    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:center}
-    .eyebrow{color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;margin-bottom:16px}
-    h1,h2,h3{font-family:"Space Grotesk",sans-serif;line-height:1.12}
-    h1{font-size:clamp(3rem,7vw,5.8rem);letter-spacing:-.06em;max-width:800px}
-    h1 span{background:linear-gradient(90deg,#fff,#7dd3fc,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .hero h2{font-size:1.3rem;color:#c8d7e8;margin:20px 0}
-    .hero-desc{max-width:690px;color:var(--muted);font-size:1.06rem}
-    .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
-    .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 19px;border-radius:12px;font-weight:700;border:1px solid var(--line);transition:.25s}
-    .btn-primary{background:linear-gradient(135deg,var(--accent2),#2563eb);box-shadow:0 12px 28px rgba(37,99,235,.25)}
-    .btn-secondary{background:rgba(255,255,255,.04)}
-    .btn:hover{transform:translateY(-2px);border-color:rgba(125,211,252,.4)}
-    .hero-card{background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:var(--shadow)}
-    .terminal{background:#06101c;border-radius:18px;border:1px solid var(--line);overflow:hidden}
-    .terminal-top{padding:12px 16px;border-bottom:1px solid var(--line);color:#6f8299;font-size:.75rem}
-    .terminal-body{padding:25px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.84rem;color:#b8c9dc}
-    .terminal-body .cyan{color:#67e8f9}.terminal-body .purple{color:#a5b4fc}.terminal-body .green{color:#86efac}
-    section{padding:105px 0}
-    .section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:38px}
-    .section-head h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:-.04em}
-    .section-head p{max-width:560px;color:var(--muted)}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .panel{background:rgba(13,26,43,.7);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
-    .panel p{color:var(--muted)}
-    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-    .stat{padding:22px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:17px}
-    .stat strong{display:block;font-family:"Space Grotesk";font-size:1.55rem;color:var(--accent)}
-    .stat span{font-size:.84rem;color:var(--muted)}
-    .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .skill-card{padding:24px;border:1px solid var(--line);background:rgba(13,26,43,.62);border-radius:20px}
-    .skill-card i{color:var(--accent);font-size:1.3rem;margin-bottom:14px}
-    .skill-card h3{font-size:1.1rem;margin-bottom:12px}
-    .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .tag{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid var(--line);font-size:.78rem;color:#cbd8e8}
-    .timeline{position:relative;display:grid;gap:18px}
-    .exp{display:grid;grid-template-columns:160px 1fr;gap:30px;padding:24px 0;border-bottom:1px solid var(--line)}
-    .exp:last-child{border-bottom:0}
-    .date{color:var(--accent);font-size:.83rem;font-weight:700}
-    .exp h3{font-size:1.2rem;margin-bottom:5px}
-    .company{color:#b9c9da;margin-bottom:9px}
-    .exp ul{padding-left:18px;color:var(--muted)}
-    .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-    .project{overflow:hidden;border:1px solid var(--line);border-radius:22px;background:rgba(13,26,43,.7);transition:.3s}
-    .project:hover{transform:translateY(-5px);border-color:rgba(56,189,248,.3);box-shadow:var(--shadow)}
-    .project.featured{grid-column:span 2}
-    .project-cover{min-height:180px;padding:25px;display:flex;align-items:end;background:
-      radial-gradient(circle at 80% 20%,rgba(56,189,248,.28),transparent 35%),
-      linear-gradient(135deg,#101d35,#0a1424)}
-    .featured .project-cover{min-height:235px}
-    .cover-label{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700}
-    .project-cover h3{font-size:1.65rem;margin-top:8px}
-    .project-body{padding:23px}
-    .project-body p{color:var(--muted);font-size:.92rem}
-    .project-meta{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-top:18px}
-    .project-links{display:flex;gap:15px;color:#dce8f5;font-size:.86rem;font-weight:700}
-    .project-links a:hover{color:var(--accent)}
-    .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .cert{padding:21px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03)}
-    .cert small{color:var(--accent)}
-    .cert h3{font-size:1rem;margin-top:7px}
-    .contact{background:linear-gradient(135deg,rgba(37,99,235,.18),rgba(56,189,248,.08));border:1px solid var(--line);border-radius:28px;padding:45px}
-    .contact-grid{display:flex;justify-content:space-between;gap:30px;align-items:center}
-    .contact p{color:var(--muted);max-width:650px;margin-top:12px}
-    .socials{display:flex;gap:12px;flex-wrap:wrap}
-    .social{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.04)}
-    .social:hover{color:var(--accent);border-color:rgba(56,189,248,.4)}
-    footer{padding:35px 0;border-top:1px solid var(--line);color:#73869b;font-size:.85rem}
-    @media(max-width:900px){
-      .hero-grid,.about-grid{grid-template-columns:1fr}.skill-grid{grid-template-columns:repeat(2,1fr)}
-      .project-grid{grid-template-columns:1fr}.project.featured{grid-column:auto}.cert-grid{grid-template-columns:repeat(2,1fr)}
-      .links{display:none}.nav-btn{display:block}
-      .links.open{display:flex;position:absolute;top:76px;left:0;right:0;background:#07111f;flex-direction:column;padding:22px 4%;border-bottom:1px solid var(--line)}
-    }
-    @media(max-width:620px){
-      .skill-grid,.cert-grid{grid-template-columns:1fr}.exp{grid-template-columns:1fr;gap:6px}
-      .contact-grid{flex-direction:column;align-items:flex-start}.contact{padding:28px}
-      section{padding:78px 0}.hero{padding-top:110px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mohamed Salih — Data Analyst portfolio featuring Python, SQL, Power BI, machine learning, fraud detection and data visualization projects.">
+<title>Mohamed Salih | Data Analyst Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--bg:#07111f;--surface:#0d1a2b;--text:#edf5ff;--muted:#9fb0c5;--line:rgba(255,255,255,.09);--accent:#38bdf8;--accent2:#6366f1;--white:#fff;--shadow:0 22px 60px rgba(0,0,0,.25);--radius:22px;--max:1180px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Inter,sans-serif;background:radial-gradient(circle at 85% 8%,rgba(56,189,248,.12),transparent 28%),var(--bg);color:var(--text);line-height:1.7}a{color:inherit;text-decoration:none}.container{width:min(var(--max),92%);margin:auto}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(7,17,31,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}.logo{font-family:"Space Grotesk";font-weight:700;font-size:1.2rem}.logo span{color:var(--accent)}.links{display:flex;gap:28px;color:#c7d4e5;font-size:.92rem}.links a:hover{color:var(--accent)}.nav-btn{display:none;background:none;border:0;color:var(--white);font-size:1.4rem}
+.hero{min-height:100vh;display:grid;place-items:center;padding:130px 0 80px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;width:480px;height:480px;border-radius:50%;background:rgba(99,102,241,.14);filter:blur(70px);right:-150px;top:80px}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:center}.eyebrow{color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;margin-bottom:16px}h1,h2,h3{font-family:"Space Grotesk";line-height:1.12}h1{font-size:clamp(3rem,7vw,5.8rem);letter-spacing:-.06em}h1 span{background:linear-gradient(90deg,#fff,#7dd3fc,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}.hero h2{font-size:1.3rem;color:#c8d7e8;margin:20px 0}.hero-desc{max-width:690px;color:var(--muted);font-size:1.06rem}.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 19px;border-radius:12px;font-weight:700;border:1px solid var(--line);transition:.25s}.btn-primary{background:linear-gradient(135deg,var(--accent2),#2563eb)}.btn-secondary{background:rgba(255,255,255,.04)}.btn:hover{transform:translateY(-2px)}
+.hero-card{background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:var(--shadow)}.terminal{background:#06101c;border-radius:18px;border:1px solid var(--line);overflow:hidden}.terminal-top{padding:12px 16px;border-bottom:1px solid var(--line);color:#6f8299;font-size:.75rem}.terminal-body{padding:25px;font-family:ui-monospace,Consolas,monospace;font-size:.84rem;color:#b8c9dc}.terminal-body .cyan{color:#67e8f9}.terminal-body .purple{color:#a5b4fc}.terminal-body .green{color:#86efac}
+section{padding:105px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:38px}.section-head h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:-.04em}.section-head p{max-width:560px;color:var(--muted)}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.panel{background:rgba(13,26,43,.7);border:1px solid var(--line);border-radius:var(--radius);padding:28px}.panel p{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.stat{padding:22px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:17px}.stat strong{display:block;font-family:"Space Grotesk";font-size:1.55rem;color:var(--accent)}.stat span{font-size:.84rem;color:var(--muted)}
+.skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.skill-card{padding:24px;border:1px solid var(--line);background:rgba(13,26,43,.62);border-radius:20px}.skill-card i{color:var(--accent);font-size:1.3rem;margin-bottom:14px}.skill-card h3{font-size:1.1rem;margin-bottom:12px}.tags{display:flex;flex-wrap:wrap;gap:8px}.tag{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid var(--line);font-size:.78rem;color:#cbd8e8}
+.exp{display:grid;grid-template-columns:160px 1fr;gap:30px;padding:24px 0;border-bottom:1px solid var(--line)}.exp:last-child{border-bottom:0}.date{color:var(--accent);font-size:.83rem;font-weight:700}.exp h3{font-size:1.2rem;margin-bottom:5px}.company{color:#b9c9da;margin-bottom:9px}.exp ul{padding-left:18px;color:var(--muted)}
+.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}.project{overflow:hidden;border:1px solid var(--line);border-radius:22px;background:rgba(13,26,43,.7);transition:.3s}.project:hover{transform:translateY(-5px);border-color:rgba(56,189,248,.3);box-shadow:var(--shadow)}.project.featured{grid-column:span 2}.project-cover{min-height:180px;padding:25px;display:flex;align-items:end;background:radial-gradient(circle at 80% 20%,rgba(56,189,248,.28),transparent 35%),linear-gradient(135deg,#101d35,#0a1424)}.featured .project-cover{min-height:235px}.cover-label{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700}.project-cover h3{font-size:1.65rem;margin-top:8px}.project-body{padding:23px}.project-body p{color:var(--muted);font-size:.92rem}.project-meta{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-top:18px}.project-links{display:flex;gap:15px;color:#dce8f5;font-size:.86rem;font-weight:700}.project-links a:hover{color:var(--accent)}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.cert{padding:21px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03)}.cert small{color:var(--accent)}.cert h3{font-size:1rem;margin-top:7px}.contact{background:linear-gradient(135deg,rgba(37,99,235,.18),rgba(56,189,248,.08));border:1px solid var(--line);border-radius:28px;padding:45px}.contact-grid{display:flex;justify-content:space-between;gap:30px;align-items:center}.contact p{color:var(--muted);max-width:650px;margin-top:12px}.socials{display:flex;gap:12px;flex-wrap:wrap}.social{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.04)}.social:hover{color:var(--accent);border-color:rgba(56,189,248,.4)}footer{padding:35px 0;border-top:1px solid var(--line);color:#73869b;font-size:.85rem}
+@media(max-width:900px){.hero-grid,.about-grid{grid-template-columns:1fr}.skill-grid{grid-template-columns:repeat(2,1fr)}.project-grid{grid-template-columns:1fr}.project.featured{grid-column:auto}.cert-grid{grid-template-columns:repeat(2,1fr)}.links{display:none}.nav-btn{display:block}.links.open{display:flex;position:absolute;top:76px;left:0;right:0;background:#07111f;flex-direction:column;padding:22px 4%;border-bottom:1px solid var(--line)}}@media(max-width:620px){.skill-grid,.cert-grid{grid-template-columns:1fr}.exp{grid-template-columns:1fr;gap:6px}.contact-grid{flex-direction:column;align-items:flex-start}.contact{padding:28px}section{padding:78px 0}.hero{padding-top:110px}}
+</style>
 </head>
 <body>
-<header class="nav">
-  <div class="container nav-inner">
-    <a class="logo" href="#home">Mohamed<span>.</span></a>
-    <nav class="links" id="links">
-      <a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a>
-      <a href="#projects">Projects</a><a href="#certificates">Certificates</a><a href="#contact">Contact</a>
-    </nav>
-    <button class="nav-btn" id="navBtn" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
-  </div>
-</header>
-
+<header class="nav"><div class="container nav-inner"><a class="logo" href="#home">Mohamed<span>.</span></a><nav class="links" id="links"><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#certificates">Certificates</a><a href="#contact">Contact</a></nav><button class="nav-btn" id="navBtn" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button></div></header>
 <main id="home">
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <p class="eyebrow">Data Analyst · BI · Machine Learning</p>
-      <h1>Hi, I'm <span>Mohamed Salih</span></h1>
-      <h2>Turning data into actionable insights.</h2>
-      <p class="hero-desc">Data Analyst with a foundation in Information Technology, focused on Python, SQL, Power BI, Excel, data visualization, predictive modeling, and practical business analytics.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="assets/Mohamed_Salih_CV.pdf" download><i class="fa-solid fa-download"></i> Download CV</a>
-        <a class="btn btn-secondary" href="#projects"><i class="fa-solid fa-arrow-down"></i> Explore Projects</a>
-      </div>
-    </div>
-    <div class="hero-card">
-      <div class="terminal">
-        <div class="terminal-top">mohamed_salih.py</div>
-        <div class="terminal-body">
-          <div><span class="purple">role</span> = <span class="green">"Data Analyst"</span></div>
-          <div><span class="purple">core</span> = [<span class="green">"Python"</span>, <span class="green">"SQL"</span>, <span class="green">"Power BI"</span>]</div>
-          <div><span class="purple">focus</span> = <span class="green">"Business Insights"</span></div>
-          <br>
-          <div><span class="cyan">analyze</span>(data)</div>
-          <div><span class="cyan">build</span>(dashboards)</div>
-          <div><span class="cyan">evaluate</span>(models)</div>
-          <div><span class="cyan">communicate</span>(insights)</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="container">
-    <div class="section-head"><div><p class="eyebrow">About</p><h2>Data, analysis, and practical solutions.</h2></div>
-    <p>I combine analytical thinking with hands-on projects to clean data, discover patterns, build dashboards, and develop predictive models.</p></div>
-    <div class="about-grid">
-      <div class="panel"><p>My background is in Information Technology, with practical experience across data analytics, business intelligence, machine learning, and IT support. I enjoy turning raw datasets into clear visual stories and useful business outputs.</p></div>
-      <div class="stats">
-        <div class="stat"><strong>5.8M+</strong><span>Flight records analyzed</span></div>
-        <div class="stat"><strong>25K</strong><span>Amazon reviews analyzed</span></div>
-        <div class="stat"><strong>1,000</strong><span>Books scraped and cleaned</span></div>
-        <div class="stat"><strong>0.9208</strong><span>R² — House Price XGBoost</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="container">
-    <div class="section-head"><div><p class="eyebrow">Skills</p><h2>Technical toolkit</h2></div><p>Focused on the tools and methods used throughout my projects and training.</p></div>
-    <div class="skill-grid">
-      <div class="skill-card"><i class="fa-solid fa-chart-line"></i><h3>Data Analytics</h3><div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">EDA</span><span class="tag">Statistics</span><span class="tag">Data Cleaning</span></div></div>
-      <div class="skill-card"><i class="fa-solid fa-chart-column"></i><h3>BI & Visualization</h3><div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Excel</span><span class="tag">Tableau</span><span class="tag">KPIs</span><span class="tag">Dashboards</span></div></div>
-      <div class="skill-card"><i class="fa-solid fa-database"></i><h3>SQL & Databases</h3><div class="tags"><span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Data Modeling</span><span class="tag">DBMS</span></div></div>
-      <div class="skill-card"><i class="fa-solid fa-brain"></i><h3>Machine Learning</h3><div class="tags"><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Regression</span><span class="tag">Classification</span></div></div>
-      <div class="skill-card"><i class="fa-solid fa-microchip"></i><h3>AI & Deep Learning</h3><div class="tags"><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">CNN</span><span class="tag">NLP</span><span class="tag">VADER</span><span class="tag">GNN</span></div></div>
-      <div class="skill-card"><i class="fa-solid fa-code-branch"></i><h3>Tools</h3><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Jupyter</span><span class="tag">Anaconda</span></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="container">
-    <div class="section-head"><div><p class="eyebrow">Experience</p><h2>Training & practical experience</h2></div></div>
-    <div class="panel timeline">
-      <article class="exp"><div class="date">Aug 2026 — Sep 2026</div><div><h3>Data Analytics Intern</h3><div class="company">CodeAlpha · Virtual Internship</div><ul><li>Scraped and cleaned 1,000 books using Requests and BeautifulSoup.</li><li>Performed EDA and statistical analysis with Pandas, Matplotlib, and Seaborn.</li><li>Analyzed 25,000 Amazon reviews using NLP and VADER, including emotion analysis.</li></ul></div></article>
-      <article class="exp"><div class="date">Sep 2026</div><div><h3>Data Science Job Simulation</h3><div class="company">British Airways · Forage</div><ul><li>Scraped and analyzed customer review data to uncover customer insights and trends.</li><li>Performed data analysis to identify patterns in customer feedback and behavior.</li><li>Built a predictive model to understand factors influencing customer purchasing behavior.</li></ul></div></article>
-      <article class="exp"><div class="date">May 2026</div><div><h3>Data Analytics Trainee</h3><div class="company">MedTourEasy</div><ul><li>Built the Predict Blood Donations project on 700+ donor records.</li><li>Applied cleaning, EDA, preprocessing, and feature engineering; reported 92% prediction accuracy.</li></ul></div></article>
-      <article class="exp"><div class="date">Apr 2026</div><div><h3>IT Support Trainee</h3><div class="company">Practical Training</div><ul><li>Completed 20+ IT support labs and resolved 50+ simulated support cases.</li><li>Installed Windows, Office, printers, and supported end users.</li></ul></div></article>
-      <article class="exp"><div class="date">Mar 2026</div><div><h3>Data Analytics Virtual Experience</h3><div class="company">Quantium · Forage</div><ul><li>Analyzed retail transaction data, performed EDA, and produced business recommendations.</li></ul></div></article>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="container">
-    <div class="section-head"><div><p class="eyebrow">Featured Projects</p><h2>Selected work</h2></div><p>End-to-end projects combining business intelligence, data analysis, machine learning, visualization, and practical decision support.</p></div>
-    <div class="project-grid">
-      <article class="project featured"><div class="project-cover"><div><div class="cover-label">Featured · Business Intelligence</div><h3>Airline Performance Analysis</h3></div></div><div class="project-body"><p>End-to-end airline analysis using Python, Pandas, Power BI, and DAX across 5.8M+ flight records, covering delays, cancellations, airlines, airports, routes, and interactive dashboard analysis.</p><div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Power BI</span><span class="tag">DAX</span></div><div class="project-meta"><span>5.8M+ records</span><div class="project-links"><a href="https://github.com/mosalih23-c/airline-performance-analysis" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">Machine Learning</div><h3>House Price Prediction</h3></div></div><div class="project-body"><p>End-to-end regression pipeline with preprocessing, model comparison, XGBoost, tuning, evaluation, and a Gradio prediction interface.</p><div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">Scikit-learn</span><span class="tag">Gradio</span></div><div class="project-meta"><span>R² = 0.9208</span><div class="project-links"><a href="https://github.com/mosalih23-c/house-price-prediction" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">Healthcare · Business Intelligence</div><h3>Hospital Analytics & Patient Insights</h3></div></div><div class="project-body"><p>Interactive healthcare dashboard analyzing patients, clinical conditions, hospital performance, billing, admissions, insurance providers, and length of stay using Excel, Power BI, and DAX.</p><div class="tags" style="margin-top:15px"><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">DAX</span><span class="tag">Healthcare Analytics</span></div><div class="project-meta"><span>Interactive Dashboard</span><div class="project-links"><a href="https://github.com/mosalih23-c/hospital-analytics-powerbi" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">HR · Business Intelligence</div><h3>HR Analytics Dashboard</h3></div></div><div class="project-body"><p>Interactive HR dashboard analyzing employee attrition, departments, job roles, overtime, income, demographics, and workforce trends to support HR decision-making.</p><div class="tags" style="margin-top:15px"><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">DAX</span><span class="tag">HR Analytics</span></div><div class="project-meta"><span>16.12% Attrition</span><div class="project-links"><a href="https://github.com/mosalih23-c/hr-analytics-dashboard" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">Computer Vision · GNN</div><h3>Face Verification with GNN</h3></div></div><div class="project-body"><p>Face verification project combining ArcFace embeddings, graph construction, and a Graph Neural Network for pair verification.</p><div class="tags" style="margin-top:15px"><span class="tag">PyTorch</span><span class="tag">ArcFace</span><span class="tag">GNN</span><span class="tag">Computer Vision</span></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">Customer Analytics</div><h3>Customer Churn Analysis</h3></div></div><div class="project-body"><p>Churn analysis focused on data preparation, imbalanced classification, logistic regression, evaluation metrics, and business drivers.</p><div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Logistic Regression</span></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">NLP · CodeAlpha</div><h3>Amazon Reviews Sentiment Analysis</h3></div></div><div class="project-body"><p>Sentiment and emotion analysis on 25,000 Amazon reviews using NLP and VADER, with visual analytical outputs.</p><div class="tags" style="margin-top:15px"><span class="tag">NLP</span><span class="tag">VADER</span><span class="tag">Python</span></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">Web Scraping · CodeAlpha</div><h3>Books Web Scraping</h3></div></div><div class="project-body"><p>Collected and cleaned a dataset of 1,000 books using Requests and BeautifulSoup, followed by exploratory analysis.</p><div class="tags" style="margin-top:15px"><span class="tag">Requests</span><span class="tag">BeautifulSoup</span><span class="tag">Pandas</span></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">Business Intelligence</div><h3>Retail Sales Performance</h3></div></div><div class="project-body"><p>Analyzed 5,000+ retail records, improved data quality, designed KPIs, and built an interactive Power BI dashboard.</p><div class="tags" style="margin-top:15px"><span class="tag">Excel</span><span class="tag">Power BI</span><span class="tag">DAX</span></div></div></article>
-      <article class="project"><div class="project-cover"><div><div class="cover-label">Deep Learning</div><h3>Apple Disease Detection</h3></div></div><div class="project-body"><p>CNN-based image classification project using TensorFlow/Keras for apple leaf disease detection.</p><div class="tags" style="margin-top:15px"><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">CNN</span></div><div class="project-meta"><span>92% accuracy</span></div></div></article>
-    </div>
-  </div>
-</section>
-
-<section id="certificates">
-  <div class="container">
-    <div class="section-head"><div><p class="eyebrow">Certifications</p><h2>Professional learning</h2></div></div>
-    <div class="cert-grid">
-      <div class="cert"><small>Google</small><h3>Google Data Analytics</h3></div>
-      <div class="cert"><small>Google</small><h3>Google IT Support Professional Certificate</h3></div>
-      <div class="cert"><small>Google</small><h3>Google AI</h3></div>
-      <div class="cert"><small>Meta</small><h3>Python Data Analytics</h3></div>
-      <div class="cert"><small>Microsoft</small><h3>Data Analysis & Visualization with Power BI</h3></div>
-      <div class="cert"><small>Microsoft</small><h3>Data Modeling in Power BI</h3></div>
-      <div class="cert"><small>Microsoft</small><h3>SQL Foundations</h3></div>
-      <div class="cert"><small>IBM</small><h3>Introduction to Data Analysis</h3></div>
-      <div class="cert"><small>IBM</small><h3>Excel Basics for Data Analysis</h3></div>
-      <div class="cert"><small>IBM</small><h3>Generative AI: Introduction & Applications</h3></div>
-      <div class="cert"><small>IBM</small><h3>Generative AI: Prompt Engineering Basics</h3></div>
-      <div class="cert"><small>Other</small><h3>International Computer Driving License (ICDL)</h3></div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="container">
-    <div class="contact">
-      <div class="contact-grid">
-        <div><p class="eyebrow">Contact</p><h2>Let's connect.</h2><p>I'm open to opportunities in Data Analytics, Business Intelligence, and related entry-level roles.</p></div>
-        <div class="socials">
-          <a class="social" href="mailto:salihmohamed169@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-          <a class="social" href="https://github.com/mosalih23-c" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a class="social" href="https://www.linkedin.com/in/mohamed-salih-341bb0368/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="hero"><div class="container hero-grid"><div><p class="eyebrow">Data Analyst · BI · Machine Learning</p><h1>Hi, I'm <span>Mohamed Salih</span></h1><h2>Turning data into actionable insights.</h2><p class="hero-desc">Data Analyst with a foundation in Information Technology, focused on Python, SQL, Power BI, Excel, data visualization, predictive modeling, and practical business analytics.</p><div class="actions"><a class="btn btn-primary" href="assets/Mohamed_Salih_CV.pdf" download><i class="fa-solid fa-download"></i> Download CV</a><a class="btn btn-secondary" href="#projects"><i class="fa-solid fa-arrow-down"></i> Explore Projects</a></div></div><div class="hero-card"><div class="terminal"><div class="terminal-top">mohamed_salih.py</div><div class="terminal-body"><div><span class="purple">role</span> = <span class="green">"Data Analyst"</span></div><div><span class="purple">core</span> = [<span class="green">"Python"</span>, <span class="green">"SQL"</span>, <span class="green">"Power BI"</span>]</div><div><span class="purple">focus</span> = <span class="green">"Business Insights"</span></div><br><div><span class="cyan">analyze</span>(data)</div><div><span class="cyan">build</span>(dashboards)</div><div><span class="cyan">evaluate</span>(models)</div><div><span class="cyan">communicate</span>(insights)</div></div></div></div></div></section>
+<section id="about"><div class="container"><div class="section-head"><div><p class="eyebrow">About</p><h2>Data, analysis, and practical solutions.</h2></div><p>I combine analytical thinking with hands-on projects to clean data, discover patterns, build dashboards, and develop predictive models.</p></div><div class="about-grid"><div class="panel"><p>My background is in Information Technology, with practical experience across data analytics, business intelligence, machine learning, and IT support. I enjoy turning raw datasets into clear visual stories and useful business outputs.</p></div><div class="stats"><div class="stat"><strong>6.3M+</strong><span>Financial transactions analyzed</span></div><div class="stat"><strong>5.8M+</strong><span>Flight records analyzed</span></div><div class="stat"><strong>25K</strong><span>Amazon reviews analyzed</span></div><div class="stat"><strong>0.9208</strong><span>R² — House Price XGBoost</span></div></div></div></div></section>
+<section id="skills"><div class="container"><div class="section-head"><div><p class="eyebrow">Skills</p><h2>Technical toolkit</h2></div><p>Focused on the tools and methods used throughout my projects and training.</p></div><div class="skill-grid">
+<div class="skill-card"><i class="fa-solid fa-chart-line"></i><h3>Data Analytics</h3><div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">EDA</span><span class="tag">Statistics</span><span class="tag">Data Cleaning</span></div></div>
+<div class="skill-card"><i class="fa-solid fa-chart-column"></i><h3>BI & Visualization</h3><div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Excel</span><span class="tag">Tableau</span><span class="tag">KPIs</span><span class="tag">Dashboards</span></div></div>
+<div class="skill-card"><i class="fa-solid fa-database"></i><h3>SQL & Databases</h3><div class="tags"><span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Data Modeling</span><span class="tag">DBMS</span></div></div>
+<div class="skill-card"><i class="fa-solid fa-brain"></i><h3>Machine Learning</h3><div class="tags"><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Regression</span><span class="tag">Classification</span><span class="tag">Fraud Detection</span></div></div>
+<div class="skill-card"><i class="fa-solid fa-microchip"></i><h3>AI & Deep Learning</h3><div class="tags"><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">CNN</span><span class="tag">NLP</span><span class="tag">VADER</span><span class="tag">GNN</span></div></div>
+<div class="skill-card"><i class="fa-solid fa-code-branch"></i><h3>Tools</h3><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Jupyter</span><span class="tag">Anaconda</span><span class="tag">Gradio</span></div></div>
+</div></div></section>
+<section id="experience"><div class="container"><div class="section-head"><div><p class="eyebrow">Experience</p><h2>Training & practical experience</h2></div></div><div class="panel">
+<article class="exp"><div class="date">Aug 2026 — Sep 2026</div><div><h3>Data Analytics Intern</h3><div class="company">CodeAlpha · Virtual Internship</div><ul><li>Scraped and cleaned 1,000 books using Requests and BeautifulSoup.</li><li>Performed EDA and statistical analysis with Pandas, Matplotlib, and Seaborn.</li><li>Analyzed 25,000 Amazon reviews using NLP and VADER, including emotion analysis.</li></ul></div></article>
+<article class="exp"><div class="date">Sep 2026</div><div><h3>Data Science Job Simulation</h3><div class="company">British Airways · Forage</div><ul><li>Scraped and analyzed customer review data to uncover customer insights and trends.</li><li>Performed data analysis to identify patterns in customer feedback and behavior.</li><li>Built a predictive model to understand factors influencing customer purchasing behavior.</li></ul></div></article>
+<article class="exp"><div class="date">May 2026</div><div><h3>Data Analytics Trainee</h3><div class="company">MedTourEasy</div><ul><li>Built the Predict Blood Donations project on 700+ donor records.</li><li>Applied cleaning, EDA, preprocessing, and feature engineering; reported 92% prediction accuracy.</li></ul></div></article>
+<article class="exp"><div class="date">Apr 2026</div><div><h3>IT Support Trainee</h3><div class="company">Practical Training</div><ul><li>Completed 20+ IT support labs and resolved 50+ simulated support cases.</li><li>Installed Windows, Office, printers, and supported end users.</li></ul></div></article>
+<article class="exp"><div class="date">Mar 2026</div><div><h3>Data Analytics Virtual Experience</h3><div class="company">Quantium · Forage</div><ul><li>Analyzed retail transaction data, performed EDA, and produced business recommendations.</li></ul></div></article>
+</div></div></section>
+<section id="projects"><div class="container"><div class="section-head"><div><p class="eyebrow">Featured Projects</p><h2>Selected work</h2></div><p>End-to-end projects combining business intelligence, data analysis, machine learning, visualization, and practical decision support.</p></div><div class="project-grid">
+<article class="project featured"><div class="project-cover"><div><div class="cover-label">Featured · Machine Learning</div><h3>Financial Fraud Detection & Risk Analytics</h3></div></div><div class="project-body"><p>End-to-end fraud detection project using 6.36M+ financial transactions. Includes EDA, financial risk feature engineering, Logistic Regression, Random Forest, XGBoost, threshold optimization, model comparison, and an interactive Gradio prediction app.</p><div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">XGBoost</span><span class="tag">Scikit-learn</span><span class="tag">Gradio</span></div><div class="project-meta"><span>F1 = 99.88% · Precision = 100%</span><div class="project-links"><a href="https://github.com/mosalih23-c/financial-fraud-detection" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">Business Intelligence</div><h3>Airline Performance Analysis</h3></div></div><div class="project-body"><p>End-to-end airline analysis using Python, Pandas, Power BI, and DAX across 5.8M+ flight records.</p><div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">DAX</span></div><div class="project-meta"><span>5.8M+ records</span><div class="project-links"><a href="https://github.com/mosalih23-c/airline-performance-analysis" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">Machine Learning</div><h3>House Price Prediction</h3></div></div><div class="project-body"><p>Regression pipeline with preprocessing, model comparison, XGBoost, tuning, evaluation, and Gradio prediction.</p><div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">Scikit-learn</span><span class="tag">Gradio</span></div><div class="project-meta"><span>R² = 0.9208</span><div class="project-links"><a href="https://github.com/mosalih23-c/house-price-prediction" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">Healthcare · BI</div><h3>Hospital Analytics & Patient Insights</h3></div></div><div class="project-body"><p>Healthcare dashboard analyzing patients, clinical conditions, hospital performance, billing, admissions, insurance, and length of stay.</p><div class="tags" style="margin-top:15px"><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">DAX</span></div><div class="project-meta"><span>Interactive Dashboard</span><div class="project-links"><a href="https://github.com/mosalih23-c/hospital-analytics-powerbi" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">HR · BI</div><h3>HR Analytics Dashboard</h3></div></div><div class="project-body"><p>Interactive HR dashboard analyzing employee attrition, departments, job roles, overtime, income, demographics, and workforce trends.</p><div class="tags" style="margin-top:15px"><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">DAX</span></div><div class="project-meta"><span>16.12% Attrition</span><div class="project-links"><a href="https://github.com/mosalih23-c/hr-analytics-dashboard" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">Computer Vision · GNN</div><h3>Face Verification with GNN</h3></div></div><div class="project-body"><p>Face verification combining ArcFace embeddings, graph construction, and a Graph Neural Network.</p><div class="tags" style="margin-top:15px"><span class="tag">PyTorch</span><span class="tag">ArcFace</span><span class="tag">GNN</span></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">Customer Analytics</div><h3>Customer Churn Analysis</h3></div></div><div class="project-body"><p>Churn analysis focused on data preparation, imbalanced classification, evaluation metrics, and business drivers.</p><div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Classification</span></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">NLP · CodeAlpha</div><h3>Amazon Reviews Sentiment Analysis</h3></div></div><div class="project-body"><p>Sentiment and emotion analysis on 25,000 Amazon reviews using NLP and VADER.</p><div class="tags" style="margin-top:15px"><span class="tag">NLP</span><span class="tag">VADER</span><span class="tag">Python</span></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">Business Intelligence</div><h3>Retail Sales Performance</h3></div></div><div class="project-body"><p>Analyzed 5,000+ retail records, designed KPIs, and built an interactive Power BI dashboard.</p><div class="tags" style="margin-top:15px"><span class="tag">Excel</span><span class="tag">Power BI</span><span class="tag">DAX</span></div></div></article>
+<article class="project"><div class="project-cover"><div><div class="cover-label">Deep Learning</div><h3>Apple Disease Detection</h3></div></div><div class="project-body"><p>CNN-based image classification using TensorFlow/Keras for apple leaf disease detection.</p><div class="tags" style="margin-top:15px"><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">CNN</span></div></div></article>
+</div></div></section>
+<section id="certificates"><div class="container"><div class="section-head"><div><p class="eyebrow">Certifications</p><h2>Professional learning</h2></div></div><div class="cert-grid">
+<div class="cert"><small>Google</small><h3>Google Data Analytics</h3></div><div class="cert"><small>Google</small><h3>Google IT Support Professional Certificate</h3></div><div class="cert"><small>Google</small><h3>Google AI</h3></div><div class="cert"><small>Meta</small><h3>Python Data Analytics</h3></div><div class="cert"><small>Microsoft</small><h3>Data Analysis & Visualization with Power BI</h3></div><div class="cert"><small>Microsoft</small><h3>Data Modeling in Power BI</h3></div><div class="cert"><small>Microsoft</small><h3>SQL Foundations</h3></div><div class="cert"><small>IBM</small><h3>Introduction to Data Analysis</h3></div><div class="cert"><small>IBM</small><h3>Excel Basics for Data Analysis</h3></div><div class="cert"><small>IBM</small><h3>Generative AI: Introduction & Applications</h3></div><div class="cert"><small>IBM</small><h3>Generative AI: Prompt Engineering Basics</h3></div><div class="cert"><small>Other</small><h3>International Computer Driving License (ICDL)</h3></div>
+</div></div></section>
+<section id="contact"><div class="container"><div class="contact"><div class="contact-grid"><div><p class="eyebrow">Contact</p><h2>Let's connect.</h2><p>I'm open to opportunities in Data Analytics, Business Intelligence, Data Science, and related entry-level roles.</p></div><div class="socials"><a class="social" href="mailto:salihmohamed169@gmail.com"><i class="fa-solid fa-envelope"></i></a><a class="social" href="https://github.com/mosalih23-c" target="_blank"><i class="fab fa-github"></i></a><a class="social" href="https://www.linkedin.com/in/mohamed-salih-341bb0368/" target="_blank"><i class="fab fa-linkedin-in"></i></a></div></div></div></div></section>
 </main>
-
 <footer><div class="container">© 2026 Mohamed Salih. Data Analyst Portfolio.</div></footer>
-<script>
-  const btn=document.getElementById('navBtn'), links=document.getElementById('links');
-  btn.addEventListener('click',()=>links.classList.toggle('open'));
-  document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
-</script>
+<script>const btn=document.getElementById('navBtn'),links=document.getElementById('links');btn.addEventListener('click',()=>links.classList.toggle('open'));document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));</script>
 </body>
 </html>
