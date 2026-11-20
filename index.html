@@ -581,6 +581,352 @@
                 padding-top: 110px
             }
         }
+
+        /* ---------- Dashboard covers ---------- */
+        .project-grid {
+            grid-auto-flow: dense
+        }
+
+        .project-cover.has-dash {
+            position: relative;
+            height: 250px;
+            min-height: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #0a1424
+        }
+
+        .featured .project-cover.has-dash {
+            height: 360px
+        }
+
+        .project-cover.has-dash img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform .5s ease
+        }
+
+        .project-cover.has-dash::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(7, 17, 31, 0) 35%, rgba(7, 17, 31, .55) 62%, rgba(7, 17, 31, .96) 100%);
+            pointer-events: none
+        }
+
+        .project:hover .project-cover.has-dash img {
+            transform: scale(1.03)
+        }
+
+        .cover-text {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            padding: 25px;
+            pointer-events: none
+        }
+
+        .dash-count {
+            position: absolute;
+            z-index: 2;
+            right: 22px;
+            bottom: 26px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 11px;
+            border-radius: 999px;
+            background: rgba(7, 17, 31, .82);
+            border: 1px solid var(--line);
+            color: var(--text);
+            font-size: .76rem;
+            font-weight: 600;
+            pointer-events: none
+        }
+
+        .dash-open {
+            position: absolute;
+            z-index: 3;
+            top: 14px;
+            right: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #04121f;
+            font: inherit;
+            font-size: .8rem;
+            font-weight: 700;
+            cursor: zoom-in;
+            box-shadow: 0 10px 24px rgba(56, 189, 248, .25)
+        }
+
+        /* the whole cover opens the dashboard (handled in JS) */
+        .project-cover.has-dash {
+            cursor: zoom-in
+        }
+
+        .dash-open:hover {
+            background: #7dd3fc
+        }
+
+        .dash-link {
+            border: 0;
+            background: none;
+            padding: 0;
+            color: inherit;
+            font: inherit;
+            cursor: pointer
+        }
+
+        .dash-link:hover {
+            color: var(--accent)
+        }
+
+        .project-links {
+            flex-wrap: wrap
+        }
+
+        .dash-open:focus-visible,
+        .dash-link:focus-visible,
+        .dash-viewer button:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px
+        }
+
+        /* ---------- Dashboard viewer ---------- */
+        .dash-viewer {
+            width: min(1280px, 96vw);
+            max-width: none;
+            max-height: 96vh;
+            margin: auto;
+            padding: 0;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: var(--surface);
+            color: var(--text);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+            overflow: hidden
+        }
+
+        .dash-viewer[open] {
+            display: flex;
+            flex-direction: column;
+            animation: dashIn .25s ease
+        }
+
+        .dash-viewer::backdrop {
+            background: rgba(2, 6, 15, .85);
+            backdrop-filter: blur(4px)
+        }
+
+        .dash-viewer-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .dash-viewer-head>div {
+            flex: 1;
+            min-width: 0
+        }
+
+        .dash-viewer-head h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .dash-viewer-head p,
+        .dash-viewer-counter {
+            color: var(--muted);
+            font-size: .88rem
+        }
+
+        .dash-viewer-counter {
+            font-variant-numeric: tabular-nums
+        }
+
+        .dash-viewer-close,
+        .dash-viewer-nav {
+            border: 0;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            color: var(--text);
+            background: rgba(255, 255, 255, .08);
+            transition: background .2s
+        }
+
+        .dash-viewer-close {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem
+        }
+
+        .dash-viewer-close:hover,
+        .dash-viewer-nav:hover {
+            background: rgba(56, 189, 248, .25)
+        }
+
+        .dash-viewer-stage {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            display: grid;
+            place-items: center;
+            padding: 16px 64px;
+            background: #040b16
+        }
+
+        .dash-viewer-stage img {
+            max-width: 100%;
+            max-height: calc(96vh - 220px);
+            width: auto;
+            height: auto;
+            border-radius: 8px
+        }
+
+        .dash-viewer-nav {
+            position: absolute;
+            top: 50%;
+            width: 44px;
+            height: 44px;
+            transform: translateY(-50%)
+        }
+
+        .dash-viewer-nav.prev {
+            left: 12px
+        }
+
+        .dash-viewer-nav.next {
+            right: 12px
+        }
+
+        .dash-viewer-nav[hidden] {
+            display: none
+        }
+
+        .dash-viewer-thumbs {
+            display: flex;
+            gap: 10px;
+            padding: 14px 20px 16px;
+            overflow-x: auto;
+            justify-content: center
+        }
+
+        .dash-viewer-thumbs:empty {
+            display: none
+        }
+
+        .dash-viewer-thumbs button {
+            flex: 0 0 auto;
+            width: 118px;
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: pointer;
+            opacity: .5;
+            text-align: left;
+            color: var(--muted);
+            font: inherit;
+            font-size: .72rem;
+            transition: opacity .2s
+        }
+
+        .dash-viewer-thumbs button img {
+            width: 100%;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            object-position: top left;
+            border-radius: 6px
+        }
+
+        .dash-viewer-thumbs button span {
+            display: block;
+            padding-top: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .dash-viewer-thumbs button:hover,
+        .dash-viewer-thumbs button[aria-current="true"] {
+            opacity: 1;
+            color: var(--text)
+        }
+
+        .dash-viewer-thumbs button[aria-current="true"] img {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px
+        }
+
+        body.dash-viewer-open {
+            overflow: hidden
+        }
+
+        @keyframes dashIn {
+            from {
+                opacity: 0;
+                transform: scale(.97)
+            }
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @media(max-width:900px) {
+            .featured .project-cover.has-dash {
+                height: 280px
+            }
+        }
+
+        @media(max-width:620px) {
+            .project-cover.has-dash,
+            .featured .project-cover.has-dash {
+                height: 230px
+            }
+            .dash-open {
+                font-size: .74rem;
+                padding: 8px 12px
+            }
+            .dash-viewer-stage {
+                padding: 10px
+            }
+            .dash-viewer-nav,
+            .dash-viewer-nav[hidden] {
+                display: none
+            }
+            .dash-viewer-thumbs {
+                justify-content: flex-start
+            }
+            .dash-viewer-thumbs button {
+                width: 92px
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dash-viewer[open] {
+                animation: none
+            }
+            .project-cover.has-dash img {
+                transition: none
+            }
+        }
     </style>
 </head>
 
@@ -772,8 +1118,11 @@
                         </div>
                     </article>
                     <article class="project featured">
-                        <div class="project-cover">
-                            <div>
+                        <div class="project-cover has-dash">
+                            <img src="assets/dashboards/hotel-booking/02-booking-overview-thumb.webp" alt="Hotel Booking Analytics Power BI dashboard" loading="lazy">
+                            <span class="dash-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 4 pages</span>
+                            <button class="dash-open" type="button" data-gallery="hotel-booking" data-start="1" aria-label="View the Hotel Booking Analytics Power BI dashboard (4 pages)"><i class="fa-solid fa-expand" aria-hidden="true"></i> View dashboard</button>
+                            <div class="cover-text">
                                 <div class="cover-label">Featured · Business Intelligence</div>
                                 <h3>Hotel Booking & Revenue Analytics</h3>
                             </div>
@@ -783,13 +1132,16 @@
                                 and cancellation patterns.</p>
                             <div class="tags" style="margin-top:15px"><span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">DAX</span><span class="tag">Revenue Analytics</span><span class="tag">Hotel Analytics</span></div>
                             <div class="project-meta"><span>119K+ bookings</span>
-                                <div class="project-links"><a href="https://github.com/mosalih23-c/hotel-booking-analytics" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                                <div class="project-links"><button type="button" class="dash-link" data-gallery="hotel-booking" data-start="1"><i class="fa-solid fa-chart-column"></i> Dashboard</button><a href="https://github.com/mosalih23-c/hotel-booking-analytics" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
                             </div>
                         </div>
                     </article>
                     <article class="project">
-                        <div class="project-cover">
-                            <div>
+                        <div class="project-cover has-dash">
+                            <img src="assets/dashboards/airline/02-executive-overview-thumb.webp" alt="Airline Performance Analysis Power BI dashboard" loading="lazy">
+                            <span class="dash-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 5 pages</span>
+                            <button class="dash-open" type="button" data-gallery="airline" data-start="1" aria-label="View the Airline Performance Analysis Power BI dashboard (5 pages)"><i class="fa-solid fa-expand" aria-hidden="true"></i> View dashboard</button>
+                            <div class="cover-text">
                                 <div class="cover-label">Business Intelligence</div>
                                 <h3>Airline Performance Analysis</h3>
                             </div>
@@ -798,13 +1150,16 @@
                             <p>End-to-end airline analysis using Python, Pandas, Power BI, and DAX across 5.8M+ flight records.</p>
                             <div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">DAX</span></div>
                             <div class="project-meta"><span>5.8M+ records</span>
-                                <div class="project-links"><a href="https://github.com/mosalih23-c/airline-performance-analysis" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                                <div class="project-links"><button type="button" class="dash-link" data-gallery="airline" data-start="1"><i class="fa-solid fa-chart-column"></i> Dashboard</button><a href="https://github.com/mosalih23-c/airline-performance-analysis" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
                             </div>
                         </div>
                     </article>
                     <article class="project featured">
-                        <div class="project-cover">
-                            <div>
+                        <div class="project-cover has-dash">
+                            <img src="assets/dashboards/saudi-tourism/01-executive-overview-thumb.webp" alt="Saudi Tourism and Hospitality Analytics Power BI dashboard" loading="lazy">
+                            <span class="dash-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 5 pages</span>
+                            <button class="dash-open" type="button" data-gallery="saudi-tourism" data-start="0" aria-label="View the Saudi Tourism and Hospitality Analytics Power BI dashboard (5 pages)"><i class="fa-solid fa-expand" aria-hidden="true"></i> View dashboard</button>
+                            <div class="cover-text">
                                 <div class="cover-label">Featured · Business Intelligence</div>
                                 <h3>Saudi Tourism & Hospitality Analytics</h3>
                             </div>
@@ -813,7 +1168,37 @@
                             <p>End-to-end analysis of Saudi tourism and hospitality establishments using Q2 2026 statistics. Covers regional and city performance, hotel occupancy, average daily rates, length of stay, tourism employment, and establishment distribution, with Python EDA, SQL validation, and a multi-page Power BI dashboard.</p>
                             <div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data Analytics</span></div>
                             <div class="project-meta"><span>Q2 2026 · Saudi Arabia</span>
-                                <div class="project-links"><a href="https://github.com/mosalih23-c/Saudi_Tourism_Analytics" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a><a href="https://github.com/mosalih23-c/Saudi_Tourism_Analytics/blob/main/reports/Saudi_Tourism_Dashboard.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Report</a></div>
+                                <div class="project-links"><button type="button" class="dash-link" data-gallery="saudi-tourism" data-start="0"><i class="fa-solid fa-chart-column"></i> Dashboard</button><a href="https://github.com/mosalih23-c/Saudi_Tourism_Analytics" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a><a href="https://github.com/mosalih23-c/Saudi_Tourism_Analytics/blob/main/reports/Saudi_Tourism_Dashboard.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Report</a></div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project featured">
+                        <div class="project-cover has-dash">
+                            <img src="assets/dashboards/retailpro/01-executive-overview-thumb.webp" alt="RetailPro Sales Power BI dashboard" loading="lazy">
+                            <span class="dash-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 4 pages</span>
+                            <button class="dash-open" type="button" data-gallery="retailpro" data-start="0" aria-label="View the RetailPro Sales Power BI dashboard (4 pages)"><i class="fa-solid fa-expand" aria-hidden="true"></i> View dashboard</button>
+                            <div class="cover-text"><div class="cover-label">Featured · Business Intelligence</div><h3>RetailPro Sales Dashboard</h3></div>
+                        </div>
+                        <div class="project-body">
+                            <p>Interactive Power BI dashboard for a multi-store retail business in Saudi Arabia, built on a cleaned and modelled Excel dataset of 15,000 sales transactions across 10 stores in 8 cities. Covers sales and profit against last year, store performance against monthly targets, customer segments, payment methods, and returns.</p>
+                            <div class="tags" style="margin-top:15px"><span class="tag">Excel</span><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data Modeling</span></div>
+                            <div class="project-meta"><span>15,000 transactions</span>
+                                <div class="project-links"><button type="button" class="dash-link" data-gallery="retailpro" data-start="0"><i class="fa-solid fa-chart-column"></i> Dashboard</button><a href="https://github.com/mosalih23-c/RetailPro_Sales_Dashboard" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a></div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project">
+                        <div class="project-cover has-dash">
+                            <img src="assets/dashboards/riyadh-air-quality/02-executive-dashboard-thumb.webp" alt="Riyadh Smart City air quality Power BI dashboard" loading="lazy">
+                            <span class="dash-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 2 pages</span>
+                            <button class="dash-open" type="button" data-gallery="riyadh-air-quality" data-start="1" aria-label="View the Riyadh Smart City air quality Power BI dashboard (2 pages)"><i class="fa-solid fa-expand" aria-hidden="true"></i> View dashboard</button>
+                            <div class="cover-text"><div class="cover-label">Geospatial · Forecasting</div><h3>Riyadh Air Quality Intelligence</h3></div>
+                        </div>
+                        <div class="project-body">
+                            <p>Historical air quality analysis for Riyadh with PM2.5 forecasting using Random Forest, geospatial mapping of monitoring stations, and an interactive Power BI report.</p>
+                            <div class="tags" style="margin-top:15px"><span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">GeoPandas</span><span class="tag">Power BI</span></div>
+                            <div class="project-meta"><span>Riyadh · Saudi Arabia</span>
+                                <div class="project-links"><button type="button" class="dash-link" data-gallery="riyadh-air-quality" data-start="1"><i class="fa-solid fa-chart-column"></i> Dashboard</button><a href="https://github.com/mosalih23-c/riyadh-smart-city-analytics" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a></div>
                             </div>
                         </div>
                     </article>
@@ -833,8 +1218,11 @@
                         </div>
                     </article>
                     <article class="project">
-                        <div class="project-cover">
-                            <div>
+                        <div class="project-cover has-dash">
+                            <img src="assets/dashboards/hospital/02-operations-patients-thumb.webp" alt="Hospital Analytics and Patient Insights Power BI dashboard" loading="lazy">
+                            <span class="dash-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 4 pages</span>
+                            <button class="dash-open" type="button" data-gallery="hospital" data-start="1" aria-label="View the Hospital Analytics and Patient Insights Power BI dashboard (4 pages)"><i class="fa-solid fa-expand" aria-hidden="true"></i> View dashboard</button>
+                            <div class="cover-text">
                                 <div class="cover-label">Healthcare · BI</div>
                                 <h3>Hospital Analytics & Patient Insights</h3>
                             </div>
@@ -843,13 +1231,16 @@
                             <p>Healthcare dashboard analyzing patients, clinical conditions, hospital performance, billing, admissions, insurance, and length of stay.</p>
                             <div class="tags" style="margin-top:15px"><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">DAX</span></div>
                             <div class="project-meta"><span>Interactive Dashboard</span>
-                                <div class="project-links"><a href="https://github.com/mosalih23-c/hospital-analytics-powerbi" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                                <div class="project-links"><button type="button" class="dash-link" data-gallery="hospital" data-start="1"><i class="fa-solid fa-chart-column"></i> Dashboard</button><a href="https://github.com/mosalih23-c/hospital-analytics-powerbi" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
                             </div>
                         </div>
                     </article>
                     <article class="project">
-                        <div class="project-cover">
-                            <div>
+                        <div class="project-cover has-dash">
+                            <img src="assets/dashboards/hr/01-overview-thumb.webp" alt="HR Analytics Power BI dashboard" loading="lazy">
+                            <span class="dash-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 1 page</span>
+                            <button class="dash-open" type="button" data-gallery="hr" data-start="0" aria-label="View the HR Analytics Power BI dashboard (1 page)"><i class="fa-solid fa-expand" aria-hidden="true"></i> View dashboard</button>
+                            <div class="cover-text">
                                 <div class="cover-label">HR · BI</div>
                                 <h3>HR Analytics Dashboard</h3>
                             </div>
@@ -858,7 +1249,7 @@
                             <p>Interactive HR dashboard analyzing employee attrition, departments, job roles, overtime, income, demographics, and workforce trends.</p>
                             <div class="tags" style="margin-top:15px"><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">DAX</span></div>
                             <div class="project-meta"><span>16.12% Attrition</span>
-                                <div class="project-links"><a href="https://github.com/mosalih23-c/hr-analytics-dashboard" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                                <div class="project-links"><button type="button" class="dash-link" data-gallery="hr" data-start="0"><i class="fa-solid fa-chart-column"></i> Dashboard</button><a href="https://github.com/mosalih23-c/hr-analytics-dashboard" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
                             </div>
                         </div>
                     </article>
@@ -899,8 +1290,11 @@
                         </div>
                     </article>
                     <article class="project">
-                        <div class="project-cover">
-                            <div>
+                        <div class="project-cover has-dash">
+                            <img src="assets/dashboards/retail-sales/01-executive-summary-thumb.webp" alt="Retail Sales Power BI dashboard" loading="lazy">
+                            <span class="dash-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 1 page</span>
+                            <button class="dash-open" type="button" data-gallery="retail-sales" data-start="0" aria-label="View the Retail Sales Power BI dashboard (1 page)"><i class="fa-solid fa-expand" aria-hidden="true"></i> View dashboard</button>
+                            <div class="cover-text">
                                 <div class="cover-label">Business Intelligence</div>
                                 <h3>Retail Sales Performance</h3>
                             </div>
@@ -908,6 +1302,9 @@
                         <div class="project-body">
                             <p>Analyzed 5,000+ retail records, designed KPIs, and built an interactive Power BI dashboard.</p>
                             <div class="tags" style="margin-top:15px"><span class="tag">Excel</span><span class="tag">Power BI</span><span class="tag">DAX</span></div>
+                            <div class="project-meta"><span>Interactive Dashboard</span>
+                                <div class="project-links"><button type="button" class="dash-link" data-gallery="retail-sales" data-start="0"><i class="fa-solid fa-chart-column"></i> Dashboard</button><a href="https://github.com/mosalih23-c/retail-sales-dashboard" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a></div>
+                            </div>
                         </div>
                     </article>
                     <article class="project">
@@ -992,11 +1389,192 @@
     <footer>
         <div class="container">© 2026 Mohamed Salih. Data Analyst Portfolio.</div>
     </footer>
+    <dialog class="dash-viewer" id="dashViewer" aria-labelledby="dashViewerTitle">
+        <div class="dash-viewer-head">
+            <div>
+                <h3 id="dashViewerTitle">Dashboard</h3>
+                <p id="dashViewerPage"></p>
+            </div>
+            <span class="dash-viewer-counter" id="dashViewerCounter"></span>
+            <button type="button" class="dash-viewer-close" id="dashViewerClose" aria-label="Close dashboard viewer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="dash-viewer-stage">
+            <button type="button" class="dash-viewer-nav prev" id="dashViewerPrev" aria-label="Previous page"><i class="fa-solid fa-chevron-left"></i></button>
+            <img id="dashViewerImg" alt="">
+            <button type="button" class="dash-viewer-nav next" id="dashViewerNext" aria-label="Next page"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="dash-viewer-thumbs" id="dashViewerThumbs"></div>
+    </dialog>
     <script>
         const btn = document.getElementById('navBtn'),
             links = document.getElementById('links');
         btn.addEventListener('click', () => links.classList.toggle('open'));
         document.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+        // ---------- Project dashboards viewer ----------
+        const DASH = "assets/dashboards/";
+        const dashboards = {
+            airline: {
+                title: "Airline Performance Analysis",
+                pages: [
+                    ["airline/01-home", "Cover Page"],
+                    ["airline/02-executive-overview", "Executive Overview"],
+                    ["airline/03-airline-performance", "Airline Performance"],
+                    ["airline/04-airports-routes", "Airports & Routes"],
+                    ["airline/05-delays-causes", "Delays & Causes"]
+                ]
+            },
+            "saudi-tourism": {
+                title: "Saudi Tourism & Hospitality Analytics",
+                pages: [
+                    ["saudi-tourism/01-executive-overview", "Executive Overview"],
+                    ["saudi-tourism/02-regional-performance", "Regional Performance"],
+                    ["saudi-tourism/03-city-analysis", "City Analysis"],
+                    ["saudi-tourism/04-employment-establishments", "Employment & Establishments"],
+                    ["saudi-tourism/05-quarterly-trends", "Quarterly Trends"]
+                ]
+            },
+            retailpro: {
+                title: "RetailPro Sales Dashboard",
+                pages: [
+                    ["retailpro/01-executive-overview", "Executive Overview (Power BI)"],
+                    ["retailpro/02-stores-targets", "Stores & Targets (Power BI)"],
+                    ["retailpro/03-customers-returns", "Customers & Returns (Power BI)"],
+                    ["retailpro/04-excel-dashboard", "Executive Dashboard (Excel)"]
+                ]
+            },
+            "hotel-booking": {
+                title: "Hotel Booking & Revenue Analytics",
+                pages: [
+                    ["hotel-booking/01-cover", "Cover Page"],
+                    ["hotel-booking/02-booking-overview", "Hotel Booking Overview"],
+                    ["hotel-booking/03-customer-booking", "Customer & Booking Analysis"],
+                    ["hotel-booking/04-hotel-performance", "Hotel Performance & Cancellations"]
+                ]
+            },
+            "riyadh-air-quality": {
+                title: "Riyadh Air Quality Intelligence",
+                pages: [
+                    ["riyadh-air-quality/01-cover", "Cover Page"],
+                    ["riyadh-air-quality/02-executive-dashboard", "Executive Dashboard"]
+                ]
+            },
+            hospital: {
+                title: "Hospital Analytics & Patient Insights",
+                pages: [
+                    ["hospital/01-home", "Home"],
+                    ["hospital/02-operations-patients", "Hospital Operations & Patient Analytics"],
+                    ["hospital/03-performance-financial", "Hospital Performance & Financial Analysis"],
+                    ["hospital/04-patient-clinical", "Patient & Clinical Analysis"]
+                ]
+            },
+            hr: {
+                title: "HR Analytics Dashboard",
+                pages: [["hr/01-overview", "Attrition Overview"]]
+            },
+            "retail-sales": {
+                title: "Retail Sales Performance",
+                pages: [["retail-sales/01-executive-summary", "Executive Summary"]]
+            }
+        };
+
+        const viewer = document.getElementById("dashViewer");
+
+        if (viewer && typeof viewer.showModal === "function") {
+            const vTitle = document.getElementById("dashViewerTitle");
+            const vPage = document.getElementById("dashViewerPage");
+            const vCounter = document.getElementById("dashViewerCounter");
+            const vImg = document.getElementById("dashViewerImg");
+            const vThumbs = document.getElementById("dashViewerThumbs");
+            const vPrev = document.getElementById("dashViewerPrev");
+            const vNext = document.getElementById("dashViewerNext");
+            let current = null;
+            let index = 0;
+            let opener = null;
+
+            const show = (i) => {
+                const pages = current.pages;
+                index = (i + pages.length) % pages.length;
+                const [file, name] = pages[index];
+                vImg.src = `${DASH}${file}.webp`;
+                vImg.alt = `${current.title}: ${name}`;
+                vPage.textContent = name;
+                vCounter.textContent = pages.length > 1 ? `${index + 1} / ${pages.length}` : "";
+                vThumbs.querySelectorAll("button").forEach((b, n) => {
+                    b.setAttribute("aria-current", n === index ? "true" : "false");
+                    if (n === index) b.scrollIntoView({ block: "nearest", inline: "nearest" });
+                });
+                // Preload the neighbours so paging feels instant
+                [index + 1, index - 1].forEach((n) => {
+                    const p = pages[(n + pages.length) % pages.length];
+                    new Image().src = `${DASH}${p[0]}.webp`;
+                });
+            };
+
+            const open = (key, start, trigger) => {
+                current = dashboards[key];
+                if (!current) return;
+                opener = trigger;
+                vTitle.textContent = current.title;
+                const multi = current.pages.length > 1;
+                vPrev.hidden = !multi;
+                vNext.hidden = !multi;
+                vThumbs.innerHTML = "";
+                if (multi) {
+                    current.pages.forEach(([file, name], n) => {
+                        const b = document.createElement("button");
+                        b.type = "button";
+                        b.setAttribute("aria-label", `Show page ${n + 1}: ${name}`);
+                        b.innerHTML = `<img src="${DASH}${file}-thumb.webp" alt="" loading="lazy" /><span></span>`;
+                        b.querySelector("span").textContent = name;
+                        b.addEventListener("click", () => show(n));
+                        vThumbs.appendChild(b);
+                    });
+                }
+                viewer.showModal();
+                document.body.classList.add("dash-viewer-open");
+                show(Number(start) || 0);
+            };
+
+            // Clicking anywhere on a dashboard cover opens it; the button inside keeps it keyboard accessible
+            document.querySelectorAll(".project-cover.has-dash").forEach((cover) => {
+                const btn = cover.querySelector(".dash-open");
+                cover.addEventListener("click", () => open(btn.dataset.gallery, btn.dataset.start, btn));
+            });
+            document.querySelectorAll(".dash-link").forEach((el) => {
+                el.addEventListener("click", () => open(el.dataset.gallery, el.dataset.start, el));
+            });
+
+            vPrev.addEventListener("click", () => show(index - 1));
+            vNext.addEventListener("click", () => show(index + 1));
+            document.getElementById("dashViewerClose").addEventListener("click", () => viewer.close());
+
+            viewer.addEventListener("click", (e) => {
+                if (e.target === viewer) viewer.close(); // click on the backdrop
+            });
+
+            viewer.addEventListener("keydown", (e) => {
+                if (!current || current.pages.length < 2) return;
+                if (e.key === "ArrowRight") show(index + 1);
+                if (e.key === "ArrowLeft") show(index - 1);
+            });
+
+            // Swipe between pages on touch screens
+            let touchX = null;
+            vImg.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+            vImg.addEventListener("touchend", (e) => {
+                if (touchX === null || current.pages.length < 2) return;
+                const dx = e.changedTouches[0].clientX - touchX;
+                if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+                touchX = null;
+            });
+
+            viewer.addEventListener("close", () => {
+                document.body.classList.remove("dash-viewer-open");
+                vImg.removeAttribute("src");
+                if (opener) opener.focus();
+            });
+        }
     </script>
 </body>
 
